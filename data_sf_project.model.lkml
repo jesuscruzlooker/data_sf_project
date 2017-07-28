@@ -6,7 +6,25 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
-explore: municipal_sf_requests {}
+explore: municipal_sf_requests {
+
+  always_filter: {
+    filters: {
+      field: category
+      value: "-MUNI Feedback"
+    }
+
+    filters: {
+      field: neighborhood
+      value: "-EMPTY"
+    }
+  }
+
+  join: neighborhood_zip {
+    relationship: many_to_one
+    sql_on: ${municipal_sf_requests.neighborhood} = ${neighborhood_zip.neighborhood} ;;
+  }
+}
 
 explore: neighborhood_pd {}
 
