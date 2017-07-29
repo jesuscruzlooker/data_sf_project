@@ -18,6 +18,11 @@ explore: municipal_sf_requests {
       field: neighborhood
       value: "-EMPTY"
     }
+
+    filters: {
+      field: resolution_group
+      value: "-Data Entry Error"
+    }
   }
 
   join: neighborhood_zip {

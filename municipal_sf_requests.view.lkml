@@ -44,6 +44,47 @@ view: municipal_sf_requests {
     sql: ${TABLE}.created_date ;;
   }
 
+  dimension: resolution_time_seconds {
+    type: number
+    sql: TIMESTAMP_DIFF(${closed_raw},${created_raw},SECOND) ;;
+  }
+
+  dimension: resolution_time_mins {
+    type: number
+    sql: ${resolution_time_seconds}/60 ;;
+  }
+
+  dimension: resolution_time_hours {
+    type: number
+    sql: ${resolution_time_seconds}/60/60  ;;
+  }
+
+  dimension: resolution_time_days {
+    type: number
+    sql: ${resolution_time_seconds}/60/60/24 ;;
+  }
+
+  dimension: resolution_group {
+    case: {
+      when: {
+        sql: ${resolution_time_seconds} <= 0 ;;
+        label: "Data Entry Error"
+      }
+
+      when: {
+        sql: ${resolution_time_seconds} > 0 ;;
+        label: "Closed Case"
+      }
+
+      when: {
+        sql: ${resolution_time_seconds} IS NULL ;;
+        label: "Open Case"
+      }
+
+      else: "Unknown"
+    }
+  }
+
   dimension: descriptor {
     type: string
     sql: ${TABLE}.descriptor ;;
@@ -127,4 +168,5 @@ view: municipal_sf_requests {
     type: count
     drill_fields: [agency_name]
   }
+
 }
