@@ -22,7 +22,8 @@ view: municipal_sf_requests {
       quarter,
       year
     ]
-    sql: ${TABLE}.closed_date ;;
+    sql: CASE WHEN ${TABLE}.closed_date IS NULL THEN current_timestamp()
+              ELSE ${TABLE}.closed_date END;;
   }
 
   dimension: complaint_type {
@@ -64,6 +65,47 @@ view: municipal_sf_requests {
     sql: ${resolution_time_seconds}/60/60/24 ;;
   }
 
+  measure: avg_res_mins {
+    type: average
+    sql: ${resolution_time_mins} ;;
+    drill_fields: [agency_name]
+  }
+
+  measure: avg_res_hours {
+    type: average
+    sql: ${resolution_time_hours} ;;
+    drill_fields: [agency_name]
+  }
+
+  measure: avg_res_days {
+    type: average
+    sql: ${resolution_time_days} ;;
+    drill_fields: [agency_name]
+  }
+
+  measure: median_res_days {
+    type: median
+    sql: ${resolution_time_days} ;;
+    drill_fields: [agency_name]
+  }
+
+  dimension: under_30mins {
+    case: {
+      when: {
+        sql: ${resolution_time_days} <= .021 ;;
+        label: "Under 30"
+      }
+
+      when: {
+        sql: ${resolution_time_days} > .021 AND  ${resolution_time_days} < .042 ;;
+        label: "30mins to 1 Hour"
+      }
+
+      else: "More than 1 hour"
+
+    }
+  }
+
   dimension: resolution_group {
     case: {
       when: {
@@ -72,12 +114,12 @@ view: municipal_sf_requests {
       }
 
       when: {
-        sql: ${resolution_time_seconds} > 0 ;;
+        sql: ${resolution_time_seconds} > 0 AND ${closed_raw} <> current_timestamp() ;;
         label: "Closed Case"
       }
 
       when: {
-        sql: ${resolution_time_seconds} IS NULL ;;
+        sql: ${resolution_time_seconds} > 0 AND ${closed_raw} = current_timestamp() ;;
         label: "Open Case"
       }
 
@@ -88,11 +130,6 @@ view: municipal_sf_requests {
   dimension: descriptor {
     type: string
     sql: ${TABLE}.descriptor ;;
-  }
-
-  dimension: incident_address {
-    type: string
-    sql: ${TABLE}.incident_address ;;
   }
 
   dimension: latitude {
@@ -150,23 +187,34 @@ view: municipal_sf_requests {
   }
 
   dimension: status_notes {
+    hidden: yes
     type: string
     sql: ${TABLE}.status_notes ;;
   }
 
   dimension: supervisor_district {
+    hidden: yes
     type: number
     sql: ${TABLE}.supervisor_district ;;
   }
 
   dimension: unique_key {
+    hidden: yes
     type: number
     sql: ${TABLE}.unique_key ;;
+  }
+
+  dimension: incident_address {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.incident_address ;;
   }
 
   measure: count {
     type: count
     drill_fields: [agency_name]
   }
+
+
 
 }

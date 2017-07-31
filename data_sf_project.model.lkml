@@ -23,6 +23,13 @@ explore: municipal_sf_requests {
       field: resolution_group
       value: "-Data Entry Error"
     }
+
+
+    filters: {
+      field: created_year
+      value:"2008/01/01 00:00:00 to 2016/12/31 23:59:59"
+    }
+
   }
 
   join: neighborhood_zip {
