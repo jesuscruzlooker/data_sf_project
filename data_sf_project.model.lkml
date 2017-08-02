@@ -42,6 +42,8 @@ explore: neighborhood_pd {}
 
 explore: neighborhood_zip {}
 
+explore: zipcode_neighborhood_grp {}
+
 explore: sffd_service_calls {
   join: zipcode_neighborhood_grp {
     relationship: many_to_one
@@ -51,4 +53,11 @@ explore: sffd_service_calls {
 
 explore: sfpd_incidents {}
 
-explore: sffd_unique_incidents {}
+explore: sfpd_unique_incidents {}
+
+explore: sffd_unique_incidents {
+  join: zipcode_neighborhood_grp {
+    relationship: many_to_one
+    sql_on: ${sffd_unique_incidents.zipcode_of_incident} = ${zipcode_neighborhood_grp.zipcode} ;;
+  }
+}
