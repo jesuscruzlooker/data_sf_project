@@ -50,3 +50,5 @@ explore: sffd_service_calls {
 }
 
 explore: sfpd_incidents {}
+
+explore: sffd_unique_incidents {}
