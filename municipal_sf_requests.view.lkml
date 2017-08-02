@@ -147,6 +147,13 @@ view: municipal_sf_requests {
     sql: ${TABLE}.longitude ;;
   }
 
+  dimension: municipal_location {
+    type: location
+    sql_latitude:  ${latitude} ;;
+    sql_longitude: ${longitude} ;;
+  }
+
+
   dimension: media_url {
     type: string
     sql: ${TABLE}.media_url ;;
