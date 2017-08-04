@@ -38,11 +38,7 @@ explore: municipal_sf_requests {
   }
 }
 
-explore: neighborhood_pd {}
 
-explore: neighborhood_zip {}
-
-explore: zipcode_neighborhood_grp {}
 
 explore: sffd_service_calls {
   join: zipcode_neighborhood_grp {
@@ -51,7 +47,6 @@ explore: sffd_service_calls {
   }
 }
 
-explore: sfpd_incidents {}
 
 explore: sfpd_unique_incidents {}
 
