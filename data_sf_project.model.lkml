@@ -38,21 +38,10 @@ explore: municipal_sf_requests {
   }
 }
 
-
-
-explore: sffd_service_calls {
-  join: zipcode_neighborhood_grp {
-    relationship: many_to_one
-    sql_on: ${sffd_service_calls.zipcode_of_incident} = ${zipcode_neighborhood_grp.zipcode} ;;
-  }
-}
-
-
-explore: sfpd_unique_incidents {}
-
 explore: sffd_unique_incidents {
   join: zipcode_neighborhood_grp {
     relationship: many_to_one
     sql_on: ${sffd_unique_incidents.zipcode_of_incident} = ${zipcode_neighborhood_grp.zipcode} ;;
   }
 }
+explore: sfpd_unique_incidents {}
