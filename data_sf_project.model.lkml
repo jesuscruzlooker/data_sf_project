@@ -16,3 +16,5 @@ explore: sffd_unique_incidents {
 explore: sfpd_unique_incidents {}
 
 explore: municipal_requests_specific_dt {}
+
+explore: municipal_neighborhood_yoy_rank {}
