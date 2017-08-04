@@ -8,11 +8,16 @@ include: "*.dashboard"
 
 explore: municipal_sf_requests {
 
+  access_filter: {
+    field: municipal_sf_requests.category
+    user_attribute: municipal__category
+  }
+
   always_filter: {
-    filters: {
-      field: category
-      value: "-MUNI Feedback"
-    }
+#    filters: {
+#      field: category
+#      value: "-MUNI Feedback"
+#    }
 
     filters: {
       field: neighborhood
