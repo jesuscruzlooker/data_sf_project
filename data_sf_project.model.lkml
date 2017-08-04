@@ -6,42 +6,6 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
-explore: municipal_sf_requests {
-
-  access_filter: {
-    field: municipal_sf_requests.category
-    user_attribute: municipal__category
-  }
-
-  always_filter: {
-#    filters: {
-#      field: category
-#      value: "-MUNI Feedback"
-#    }
-
-    filters: {
-      field: neighborhood
-      value: "-EMPTY"
-    }
-
-    filters: {
-      field: resolution_group
-      value: "-Data Entry Error"
-    }
-
-
-    filters: {
-      field: created_year
-      value:"2008/01/01 00:00:00 to 2016/12/31 23:59:59"
-    }
-
-  }
-
-  join: neighborhood_zip {
-    relationship: many_to_one
-    sql_on: ${municipal_sf_requests.neighborhood} = ${neighborhood_zip.neighborhood} ;;
-  }
-}
 
 explore: sffd_unique_incidents {
   join: zipcode_neighborhood_grp {
@@ -50,3 +14,5 @@ explore: sffd_unique_incidents {
   }
 }
 explore: sfpd_unique_incidents {}
+
+explore: municipal_requests_specific_dt {}
