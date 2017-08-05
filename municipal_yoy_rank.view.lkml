@@ -1,12 +1,11 @@
-view: municipal_neighborhood_yoy_rank {
+view: municipal_yoy_rank {
   derived_table: {
     sql_trigger_value: SELECT 1 ;;
     sql: SELECT
-        municipal_requests_specific_dt_neighborhood_group as municipal_requests_specific_dt_neighborhood_group,
         municipal_requests_specific_dt_category as municipal_requests_specific_dt_category,
         municipal_requests_specific_dt_created_date_year as municipal_requests_specific_dt_created_date_year,
         municipal_requests_specific_dt_count as municipal_requests_specific_dt_count,
-        RANK() OVER (PARTITION BY municipal_requests_specific_dt_neighborhood_group, municipal_requests_specific_dt_created_date_year ORDER BY municipal_requests_specific_dt_count desc) as municipal_neighborhood_yoy_rank
+        RANK() OVER (PARTITION BY municipal_requests_specific_dt_created_date_year ORDER BY municipal_requests_specific_dt_count desc) as municipal_sf_yoy_rank
 
 
 
@@ -60,24 +59,18 @@ view: municipal_neighborhood_yoy_rank {
             END IS NULL)) AND ((municipal_sf_requests.neighborhood IS NOT NULL AND LENGTH(municipal_sf_requests.neighborhood ) <> 0 ))
              )
       SELECT
-        municipal_requests_specific_dt.neighborhood_group  AS municipal_requests_specific_dt_neighborhood_group,
         municipal_requests_specific_dt.category  AS municipal_requests_specific_dt_category,
         EXTRACT(YEAR FROM municipal_requests_specific_dt.created_date ) AS municipal_requests_specific_dt_created_date_year,
         COUNT(*) AS municipal_requests_specific_dt_count
       FROM municipal_requests_specific_dt
 
-      GROUP BY 1,2,3 ) municipal_rank_yoy
-       ;;
+      GROUP BY 1,2 ) municipal_rank_yoy
+ ;;
   }
 
   measure: count {
     type: count
     drill_fields: [detail*]
-  }
-
-  dimension: municipal_requests_specific_dt_neighborhood_group {
-    type: string
-    sql: ${TABLE}.municipal_requests_specific_dt_neighborhood_group ;;
   }
 
   dimension: municipal_requests_specific_dt_category {
@@ -95,17 +88,19 @@ view: municipal_neighborhood_yoy_rank {
     sql: ${TABLE}.municipal_requests_specific_dt_count ;;
   }
 
-  dimension: municipal_neighborhood_yoy_rank {
+  dimension: municipal_sf_yoy_rank {
     type: number
-    sql: ${TABLE}.municipal_neighborhood_yoy_rank ;;
+    sql: ${TABLE}.municipal_sf_yoy_rank ;;
   }
 
-  measure: municipal_neighborhood_rank {
+  measure: municipal_sf_rank {
     type: max
-    sql: ${municipal_neighborhood_yoy_rank} ;;
+    sql: ${municipal_sf_yoy_rank} ;;
   }
+
+
 
   set: detail {
-    fields: [municipal_requests_specific_dt_neighborhood_group, municipal_requests_specific_dt_category, municipal_requests_specific_dt_created_date_year, municipal_requests_specific_dt_count, municipal_neighborhood_yoy_rank]
+    fields: [municipal_requests_specific_dt_category, municipal_requests_specific_dt_created_date_year, municipal_requests_specific_dt_count, municipal_sf_yoy_rank]
   }
 }
