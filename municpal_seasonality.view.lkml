@@ -83,11 +83,15 @@ view: municpal_seasonality {
     sql: ${TABLE}.municipal_requests_specific_dt_count ;;
   }
 
-  measure: municipal_requests_seasonal_count {
+  measure: municipal_requests_seasonal_average {
     type: average
     sql: ${municipal_requests_specific_dt_count} ;;
   }
 
+  measure: municipal_requests_seasonal_sum {
+    type: sum
+    sql: ${municipal_requests_specific_dt_count} ;;
+  }
   set: detail {
     fields: [municipal_requests_specific_dt_category, municipal_requests_specific_dt_created_date_year, municipal_requests_specific_dt_created_date_month, municipal_requests_specific_dt_count]
   }
