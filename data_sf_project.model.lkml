@@ -11,6 +11,16 @@ include: "*.dashboard"
 
 explore: municipal_requests_specific_dt {}
 
+# Municipal 311 YOY RANK Requests PDT (Select 1) with preset filters
+# Remove Data Entry Errors, Certain Categories, and limit scope of data to 2008 - 2016 (~2017)
+
+explore: municipal_yoy_rank {}
+
+# Municipal 311 Neighborhood YOY RANK Requests PDT (Select 1) with preset filters
+# Remove Data Entry Errors, Certain Categories, and limit scope of data to 2008 - 2016 (~2017)
+
+explore: municipal_neighborhood_yoy_rank {}
+
 
 explore: sffd_unique_incidents {
   join: zipcode_neighborhood_grp {
@@ -19,15 +29,5 @@ explore: sffd_unique_incidents {
   }
 }
 explore: sfpd_unique_incidents {}
-
-
-
-# Municipal 311 YOY RANK Requests PDT (Select 1) with preset filters
-# Remove Data Entry Errors, Certain Categories, and limit scope of data to 2008 - 2016 (~2017)
-explore: municipal_yoy_rank {}
-
-# Municipal 311 Neighborhood YOY RANK Requests PDT (Select 1) with preset filters
-# Remove Data Entry Errors, Certain Categories, and limit scope of data to 2008 - 2016 (~2017)
-explore: municipal_neighborhood_yoy_rank {}
 
 explore: municpal_seasonality {}
