@@ -37,7 +37,7 @@ view: municipal_yoy_rank {
 
             FROM sf_thesis.municipal_sf_requests  AS municipal_sf_requests
             LEFT JOIN sf_thesis.neighborhood_zip  AS neighborhood_zip ON municipal_sf_requests.neighborhood = neighborhood_zip.neighborhood
-            WHERE (municipal_sf_requests.category <> 'MUNI Feedback' OR municipal_sf_requests.category IS NULL) AND ((((municipal_sf_requests.created_date ) >= (TIMESTAMP('2008-01-01 00:00:00')) AND (municipal_sf_requests.created_date ) < (TIMESTAMP('2016-12-31 23:59:59'))))) AND ((CASE
+            WHERE (municipal_sf_requests.category <> 'MUNI Feedback' OR municipal_sf_requests.category IS NULL) AND ((((municipal_sf_requests.created_date ) >= (TIMESTAMP('2008-01-01 00:00:00')) AND (municipal_sf_requests.created_date ) < (TIMESTAMP('2017-12-31 23:59:59'))))) AND ((CASE
             WHEN (TIMESTAMP_DIFF((CASE WHEN municipal_sf_requests.closed_date IS NULL THEN current_timestamp()
                           ELSE municipal_sf_requests.closed_date END),municipal_sf_requests.created_date,SECOND)) <= 0  THEN 'Data Entry Error'
             WHEN (TIMESTAMP_DIFF((CASE WHEN municipal_sf_requests.closed_date IS NULL THEN current_timestamp()

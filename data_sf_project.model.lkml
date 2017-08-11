@@ -48,3 +48,5 @@ explore: sffd_service_calls {
 explore: sffd_main_data {}
 
 explore: sffd_specific_dt_beta {}
+
+explore: municiapl_rank_nbhd_comparison {}
