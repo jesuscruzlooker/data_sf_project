@@ -1,5 +1,6 @@
 view: municiapl_rank_nbhd_comparison {
   derived_table: {
+    sql_trigger_value: SELECT 1 ;;
     sql: SELECT *
       FROM (
 
@@ -38,7 +39,7 @@ view: municiapl_rank_nbhd_comparison {
       SELECT
           municipal_yoy_rank_municipal_requests_specific_dt_category as category,
           municipal_yoy_rank_municipal_requests_specific_dt_created_date_year as year,
-          "City Wide" as neighborhood_group,
+          "a_City Wide" as neighborhood_group,
           municipal_yoy_rank_municipal_sf_rank as rank
 
       FROM (
