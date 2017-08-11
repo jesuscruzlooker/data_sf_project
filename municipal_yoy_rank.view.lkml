@@ -2,6 +2,7 @@ view: municipal_yoy_rank {
   derived_table: {
     sql_trigger_value: SELECT 1 ;;
     sql: SELECT
+        source as source,
         municipal_requests_specific_dt_category as municipal_requests_specific_dt_category,
         municipal_requests_specific_dt_created_date_year as municipal_requests_specific_dt_created_date_year,
         municipal_requests_specific_dt_count as municipal_requests_specific_dt_count,
@@ -59,12 +60,14 @@ view: municipal_yoy_rank {
             END IS NULL)) AND ((municipal_sf_requests.neighborhood IS NOT NULL AND LENGTH(municipal_sf_requests.neighborhood ) <> 0 ))
              )
       SELECT
+        "Municipal" AS source,
         municipal_requests_specific_dt.category  AS municipal_requests_specific_dt_category,
         EXTRACT(YEAR FROM municipal_requests_specific_dt.created_date ) AS municipal_requests_specific_dt_created_date_year,
         COUNT(*) AS municipal_requests_specific_dt_count
       FROM municipal_requests_specific_dt
 
-      GROUP BY 1,2 ) municipal_rank_yoy
+      GROUP BY 1,2,3 ) municipal_rank_yoy
+
  ;;
   }
 
@@ -76,6 +79,11 @@ view: municipal_yoy_rank {
   dimension: municipal_requests_specific_dt_category {
     type: string
     sql: ${TABLE}.municipal_requests_specific_dt_category ;;
+  }
+
+  dimension: source {
+    type: string
+    sql: ${TABLE}.source ;;
   }
 
   dimension: municipal_requests_specific_dt_created_date_year {

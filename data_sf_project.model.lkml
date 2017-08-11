@@ -37,3 +37,14 @@ explore: sffd_unique_incidents {
   }
 }
 explore: sfpd_unique_incidents {}
+
+explore: sffd_service_calls {
+  join: zipcode_neighborhood_grp {
+    relationship: many_to_one
+    sql_on: ${sffd_service_calls.zipcode_of_incident} = ${zipcode_neighborhood_grp.zipcode} ;;
+  }
+}
+
+explore: sffd_main_data {}
+
+explore: sffd_specific_dt_beta {}

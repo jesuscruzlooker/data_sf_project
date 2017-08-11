@@ -51,10 +51,12 @@ view: municpal_seasonality {
         municipal_requests_specific_dt.category  AS municipal_requests_specific_dt_category,
         EXTRACT(YEAR FROM municipal_requests_specific_dt.created_date ) AS municipal_requests_specific_dt_created_date_year,
         EXTRACT(MONTH FROM municipal_requests_specific_dt.created_date ) AS municipal_requests_specific_dt_created_date_month,
+        EXTRACT(HOUR FROM municipal_requests_specific_dt.created_date ) + 1 AS municipal_requests_specific_dt_created_date_hour,
+        EXTRACT(DAYOFWEEK FROM municipal_requests_specific_dt.created_date ) AS municipal_requests_specific_dt_created_date_dow,
         COUNT(*) AS municipal_requests_specific_dt_count
       FROM municipal_requests_specific_dt
 
-      GROUP BY 1,2, 3
+      GROUP BY 1,2,3,4,5
        ;;
   }
 
@@ -76,6 +78,16 @@ view: municpal_seasonality {
   dimension: municipal_requests_specific_dt_created_date_month {
     type: number
     sql: ${TABLE}.municipal_requests_specific_dt_created_date_month ;;
+  }
+
+  dimension: municipal_requests_specific_dt_created_date_hour {
+    type: number
+    sql: ${TABLE}.municipal_requests_specific_dt_created_date_hour ;;
+  }
+
+  dimension: municipal_requests_specific_dt_created_date_dayofweek {
+    type: number
+    sql: ${TABLE}.municipal_requests_specific_dt_created_date_dow ;;
   }
 
   dimension: municipal_requests_specific_dt_count {
