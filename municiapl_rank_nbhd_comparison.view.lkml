@@ -94,6 +94,11 @@ view: municiapl_rank_nbhd_comparison {
     sql: ${rank} ;;
   }
 
+  dimension: zipcode_z {
+    type: zipcode
+    sql: ${zipcode_neighborhood_grp.zipcode} ;;
+  }
+
   set: detail {
     fields: [category, year, neighborhood_group, rank]
   }

@@ -49,4 +49,11 @@ explore: sffd_main_data {}
 
 explore: sffd_specific_dt_beta {}
 
-explore: municiapl_rank_nbhd_comparison {}
+explore: zipcode_neighborhood_grp {}
+
+explore: municiapl_rank_nbhd_comparison {
+  join: zipcode_neighborhood_grp {
+    relationship: many_to_one
+    sql_on: ${zipcode_neighborhood_grp.neighborhood_group} = ${municiapl_rank_nbhd_comparison.neighborhood_group} ;;
+  }
+}

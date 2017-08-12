@@ -1,5 +1,6 @@
 view: municipal_requests_specific_dt {
   derived_table: {
+    sql_trigger_value: SELECT 1 ;;
     sql: SELECT
 
         unique_key as unique_key,
