@@ -84,6 +84,7 @@ view: municipal_neighborhood_yoy_rank {
   dimension: municipal_requests_specific_dt_category {
     type: string
     sql: ${TABLE}.municipal_requests_specific_dt_category ;;
+    html:<font size="3"><b>{{ linked_value }}</b></font> ;;
   }
 
   dimension: municipal_requests_specific_dt_created_date_year {
@@ -105,6 +106,7 @@ view: municipal_neighborhood_yoy_rank {
     type: max
     sql: ${municipal_neighborhood_yoy_rank} ;;
   }
+
 
   set: detail {
     fields: [municipal_requests_specific_dt_neighborhood_group, municipal_requests_specific_dt_category, municipal_requests_specific_dt_created_date_year, municipal_requests_specific_dt_count, municipal_neighborhood_yoy_rank]
