@@ -78,6 +78,7 @@ view: municipal_neighborhood_yoy_rank {
   dimension: municipal_requests_specific_dt_neighborhood_group {
     type: string
     sql: ${TABLE}.municipal_requests_specific_dt_neighborhood_group ;;
+
   }
 
   dimension: municipal_requests_specific_dt_category {

@@ -79,6 +79,7 @@ view: municipal_yoy_rank {
   dimension: municipal_requests_specific_dt_category {
     type: string
     sql: ${TABLE}.municipal_requests_specific_dt_category ;;
+    html:<font size="3"><b>{{ linked_value }}</b></font> ;;
   }
 
   dimension: source {

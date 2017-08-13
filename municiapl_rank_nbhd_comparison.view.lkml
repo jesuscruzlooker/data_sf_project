@@ -72,6 +72,7 @@ view: municiapl_rank_nbhd_comparison {
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
+    html:<font size="2"><b>{{ linked_value }}</b></font> ;;
   }
 
   dimension: year {
@@ -82,6 +83,11 @@ view: municiapl_rank_nbhd_comparison {
   dimension: neighborhood_group {
     type: string
     sql: ${TABLE}.neighborhood_group ;;
+    html:<font size="2"><b>{{ linked_value }}</b></font> ;;
+    link: {
+      label: "Neighborhood DB"
+      url: "https://dcl.dev.looker.com/dashboards/21?Neighborhood={{ rendered_value }}"
+    }
   }
 
   dimension: rank {
