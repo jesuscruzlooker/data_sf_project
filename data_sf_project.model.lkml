@@ -56,4 +56,6 @@ explore: municiapl_rank_nbhd_comparison {
     relationship: many_to_one
     sql_on: ${zipcode_neighborhood_grp.neighborhood_group} = ${municiapl_rank_nbhd_comparison.neighborhood_group} ;;
   }
-}
+  }
+
+explore: seasonality_nbhd {}
