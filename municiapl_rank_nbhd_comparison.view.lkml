@@ -39,7 +39,7 @@ view: municiapl_rank_nbhd_comparison {
       SELECT
           municipal_yoy_rank_municipal_requests_specific_dt_category as category,
           municipal_yoy_rank_municipal_requests_specific_dt_created_date_year as year,
-          "a_City Wide" as neighborhood_group,
+          "_City Wide" as neighborhood_group,
           municipal_yoy_rank_municipal_sf_rank as rank
 
       FROM (
@@ -72,7 +72,7 @@ view: municiapl_rank_nbhd_comparison {
   dimension: category {
     type: string
     sql: ${TABLE}.category ;;
-    html:<font size="2"><b>{{ linked_value }}</b></font> ;;
+    html:<font size="1"><b>{{ linked_value }}</b></font> ;;
   }
 
   dimension: year {
@@ -83,7 +83,7 @@ view: municiapl_rank_nbhd_comparison {
   dimension: neighborhood_group {
     type: string
     sql: ${TABLE}.neighborhood_group ;;
-    html:<font size="2"><b>{{ linked_value }}</b></font> ;;
+    html:<font size="1"><b>{{ linked_value }}</b></font> ;;
     link: {
       label: "Neighborhood DB"
       url: "https://dcl.dev.looker.com/dashboards/21?Neighborhood={{ rendered_value }}"
